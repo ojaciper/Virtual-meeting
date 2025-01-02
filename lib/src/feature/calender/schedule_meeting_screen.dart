@@ -9,6 +9,24 @@ class ScheduleMeetingScreen extends StatefulWidget {
 }
 
 class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
+  DateTime? _selectedDay;
+  DateTime _focuseDay = DateTime.now();
+  @override
+  void initState() {
+    super.initState();
+    _selectedDay = _focuseDay;
+  }
+
+  void _onDaySelected(DateTime selectDay, DateTime focusedDay) {
+    if (!isSameDay(_selectedDay, selectDay)) {
+      setState(() {
+        _selectedDay = selectDay;
+        _focuseDay = focusedDay;
+      });
+    }
+    print(_selectedDay);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,6 +115,48 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
                 color: Colors.white,
               ),
             ),
+            TableCalendar(
+              calendarStyle: CalendarStyle(
+                defaultTextStyle: TextStyle(
+                  color: Color(0xFFFCFCFC),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'poppins',
+                ),
+                disabledTextStyle: TextStyle(
+                  color: Color(0xFFFCFCFC),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'poppins',
+                ),
+                weekendTextStyle: TextStyle(
+                    color: Color(0xFFFCFCFC),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'poppins'),
+              ),
+              headerStyle: HeaderStyle(
+                titleCentered: true,
+                leftChevronIcon: Icon(
+                  Icons.chevron_left,
+                  color: Colors.white,
+                ),
+                rightChevronIcon: Icon(
+                  Icons.chevron_right,
+                  color: Colors.white,
+                ),
+                titleTextStyle: TextStyle(
+                  color: Color(0xFFFCFCFC),
+                ),
+                formatButtonVisible: false,
+                formatButtonTextStyle: TextStyle(color: Colors.white),
+              ),
+              focusedDay: _focuseDay,
+              firstDay: DateTime.now(),
+              lastDay: DateTime.utc(2030, 4, 14),
+              selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+              onDaySelected: _onDaySelected,
+            )
           ],
         ),
       ),
