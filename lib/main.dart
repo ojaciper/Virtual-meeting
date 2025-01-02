@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:virtual_meeting/src/constants/colors.dart';
+import 'package:virtual_meeting/src/feature/calender/schedule_meeting_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,10 +14,11 @@ class MyApp extends StatelessWidget {
         title: 'Virtual Meeting',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          primarySwatch: Colors.blue,
+          appBarTheme: AppBarTheme(color: Color(0xFF313131)),
           useMaterial3: true,
         ),
-        home: const HomePage());
+        home: const ScheduleMeetingScreen());
   }
 }
 
