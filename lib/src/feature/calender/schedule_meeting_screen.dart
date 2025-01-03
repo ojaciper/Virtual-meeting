@@ -1,6 +1,8 @@
+import 'package:cupertino_calendar_picker/cupertino_calendar_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:virtual_meeting/src/constants/strings.dart';
+import 'package:virtual_meeting/src/feature/calender/widget/calender_widget.dart';
 
 class ScheduleMeetingScreen extends StatefulWidget {
   const ScheduleMeetingScreen({super.key});
@@ -29,6 +31,7 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -89,6 +92,15 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
                   fontFamily: 'poppins',
                   fontSize: 16,
                 ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Color(0xFFFCFCFC),
+                  ),
+                ),
+              ),
+              style: TextStyle(
+                color: Color(0xFFFCFCFC),
               ),
             ),
             const SizedBox(height: 24),
@@ -115,47 +127,91 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
                 color: Colors.white,
               ),
             ),
-            TableCalendar(
-              calendarStyle: CalendarStyle(
-                defaultTextStyle: TextStyle(
-                  color: Color(0xFFFCFCFC),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'poppins',
-                ),
-                disabledTextStyle: TextStyle(
-                  color: Color(0xFFFCFCFC),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'poppins',
-                ),
-                weekendTextStyle: TextStyle(
-                    color: Color(0xFFFCFCFC),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'poppins'),
-              ),
-              headerStyle: HeaderStyle(
-                titleCentered: true,
-                leftChevronIcon: Icon(
-                  Icons.chevron_left,
-                  color: Colors.white,
-                ),
-                rightChevronIcon: Icon(
-                  Icons.chevron_right,
-                  color: Colors.white,
-                ),
-                titleTextStyle: TextStyle(
-                  color: Color(0xFFFCFCFC),
-                ),
-                formatButtonVisible: false,
-                formatButtonTextStyle: TextStyle(color: Colors.white),
-              ),
-              focusedDay: _focuseDay,
-              firstDay: DateTime.now(),
-              lastDay: DateTime.utc(2030, 4, 14),
-              selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+            CalenderWidget(
+              focuseDay: _focuseDay,
+              selectedDay: _selectedDay,
               onDaySelected: _onDaySelected,
+            ),
+            const SizedBox(height: 28),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  // mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Start time",
+                      style: TextStyle(
+                        color: Color(0XFFFCFCFC),
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'poppins',
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Container(
+                      width: 180,
+                      color: Color(0xFF313131),
+                      child: CupertinoTimePickerButton(
+                        initialTime: const TimeOfDay(hour: 9, minute: 41),
+                        // offset: Offset(-size.width / 5, -size.height / 3.7),
+                        onTimeChanged: (time) {
+                          print(time.toString());
+                        },
+                        buttonDecoration: PickerButtonDecoration(
+                          textStyle: TextStyle(
+                            color: Color(0xFFFCFCFC),
+                            fontFamily: 'poppins',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        mainColor: Color(0xFFFCFCFC),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "End time",
+                      style: TextStyle(
+                        color: Color(0XFFFCFCFC),
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'poppins',
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Container(
+                      width: 180,
+                      color: Color(0xFF313131),
+                      child: CupertinoTimePickerButton(
+                        initialTime: const TimeOfDay(hour: 9, minute: 41),
+                        onTimeChanged: (time) {},
+                        buttonDecoration: PickerButtonDecoration(
+                          textStyle: TextStyle(
+                            color: Color(0xFFFCFCFC),
+                            fontFamily: 'poppins',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        mainColor: Color(0xFFFCFCFC),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+            Container(
+              height: 30,
+              color: Color(0xFFFCFCFC),
+              child: Column(
+                children: [],
+              ),
             )
           ],
         ),

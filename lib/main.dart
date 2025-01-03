@@ -1,5 +1,8 @@
+import 'package:cupertino_calendar_picker/cupertino_calendar_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
 import 'package:virtual_meeting/src/constants/colors.dart';
 import 'package:virtual_meeting/src/feature/calender/schedule_meeting_screen.dart';
 
@@ -28,17 +31,32 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: Center(
-          child: CalendarDatePicker(
-            initialDate: DateTime.now(),
-            firstDate: DateTime.now(),
-            lastDate: DateTime.now(),
-            onDateChanged: (DateTime date) {},
-          ),
-        ),
+            child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text("Testing out time"),
+            Container(
+              width: 100,
+              child: CupertinoTimePickerButton(
+                initialTime: const TimeOfDay(hour: 9, minute: 41),
+                offset: Offset(-size.width / 5, -size.height / 3.7),
+                onTimeChanged: (time) {},
+              ),
+            ),
+            Container(
+              child: CupertinoTimePickerButton(
+                offset: Offset(10, -size.height / 3.7),
+                initialTime: const TimeOfDay(hour: 9, minute: 41),
+                onTimeChanged: (time) {},
+              ),
+            )
+          ],
+        )),
       ),
     );
   }

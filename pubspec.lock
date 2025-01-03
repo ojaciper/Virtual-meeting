@@ -41,6 +41,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.19.0"
+  cupertino_calendar_picker:
+    dependency: "direct main"
+    description:
+      name: cupertino_calendar_picker
+      sha256: "739895b3af02a39802d73893600e8ea457bb7aeba2d7e4fdc2f5eab0151769b2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -70,6 +78,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -216,6 +229,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.3"
+  time_picker_spinner_pop_up:
+    dependency: "direct main"
+    description:
+      name: time_picker_spinner_pop_up
+      sha256: "835f94121ef87ffc9f61ecf359f4d2001fc24517cad1578f95a35da00a4664f7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   vector_math:
     dependency: transitive
     description:
