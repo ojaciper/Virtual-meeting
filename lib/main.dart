@@ -20,6 +20,12 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Color(0xFFFBBA40),
           appBarTheme: AppBarTheme(color: Color(0xFF313131)),
+          bottomSheetTheme: BottomSheetThemeData(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero,
+            ),
+          ),
           useMaterial3: true,
         ),
         home: const ScheduleMeetingScreen());

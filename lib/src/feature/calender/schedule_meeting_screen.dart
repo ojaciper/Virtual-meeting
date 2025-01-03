@@ -26,16 +26,14 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
         _focuseDay = focusedDay;
       });
     }
-    print(_selectedDay);
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        toolbarHeight: 100,
+        toolbarHeight: 80,
         // leadingWidth: 100,
         centerTitle: true,
         leading: Icon(
@@ -156,9 +154,7 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
                       child: CupertinoTimePickerButton(
                         initialTime: const TimeOfDay(hour: 9, minute: 41),
                         // offset: Offset(-size.width / 5, -size.height / 3.7),
-                        onTimeChanged: (time) {
-                          print(time.toString());
-                        },
+                        onTimeChanged: (time) {},
                         buttonDecoration: PickerButtonDecoration(
                           textStyle: TextStyle(
                             color: Color(0xFFFCFCFC),
@@ -206,15 +202,99 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
                 )
               ],
             ),
+            const SizedBox(height: 12),
             Container(
-              height: 30,
-              color: Color(0xFFFCFCFC),
-              child: Column(
-                children: [],
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(
+                color: Color(0xFF313131),
+                borderRadius: BorderRadius.circular(10),
               ),
-            )
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'One time',
+                        style: TextStyle(
+                          color: Color(0xFFFCFCFC),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Checkbox(
+                        value: false,
+                        shape: CircleBorder(),
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        onChanged: (e) {},
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Recurring',
+                        style: TextStyle(
+                          color: Color(0xFFFCFCFC),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Checkbox(
+                        value: false,
+                        shape: CircleBorder(),
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        onChanged: (e) {},
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 28),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              decoration: BoxDecoration(
+                color: Color(0xFF313131),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xFFFBBA40),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    width: 44,
+                    height: 44,
+                    child: Icon(
+                      Icons.add,
+                      size: 20,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    'Add new schedule',
+                    style: TextStyle(
+                      color: Color(0xFFFFFFFF),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'poppins',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 150),
           ],
         ),
+      ),
+      bottomSheet: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.zero,
+        ),
+        height: MediaQuery.of(context).size.height / 10,
       ),
     );
   }
