@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:virtual_meeting/src/constants/strings.dart';
 import 'package:virtual_meeting/src/feature/calender/widget/calender_widget.dart';
+import 'package:virtual_meeting/src/feature/calender/widget/custom_check_box.dart';
+import 'package:virtual_meeting/src/feature/calender/widget/custom_text_field.dart';
 
 class ScheduleMeetingScreen extends StatefulWidget {
   const ScheduleMeetingScreen({super.key});
@@ -13,6 +15,7 @@ class ScheduleMeetingScreen extends StatefulWidget {
 class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
   DateTime? _selectedDay;
   DateTime _focuseDay = DateTime.now();
+  TextEditingController controller = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -79,28 +82,7 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
               ),
             ),
             const SizedBox(height: 12),
-            TextField(
-              decoration: InputDecoration(
-                hintText: Strings.hintText,
-                fillColor: Color(0xFF313131),
-                filled: true,
-                hintStyle: TextStyle(
-                  color: Color(0xFFACACAC),
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'poppins',
-                  fontSize: 16,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(
-                    color: Color(0xFFFCFCFC),
-                  ),
-                ),
-              ),
-              style: TextStyle(
-                color: Color(0xFFFCFCFC),
-              ),
-            ),
+            CustomTextfield(controllerName: controller),
             const SizedBox(height: 24),
             Divider(
               color: Color(0xFF494949),
@@ -125,6 +107,7 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
                 color: Colors.white,
               ),
             ),
+            // Calender widget goes here
             CalenderWidget(
               focuseDay: _focuseDay,
               selectedDay: _selectedDay,
@@ -203,55 +186,8 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
               ],
             ),
             const SizedBox(height: 12),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              decoration: BoxDecoration(
-                color: Color(0xFF313131),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'One time',
-                        style: TextStyle(
-                          color: Color(0xFFFCFCFC),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                        ),
-                      ),
-                      Checkbox(
-                        value: false,
-                        shape: CircleBorder(),
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        onChanged: (e) {},
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Recurring',
-                        style: TextStyle(
-                          color: Color(0xFFFCFCFC),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                        ),
-                      ),
-                      Checkbox(
-                        value: false,
-                        shape: CircleBorder(),
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        onChanged: (e) {},
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            // custom check box goes here
+            CustomCheckBox(),
             const SizedBox(height: 28),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
@@ -291,10 +227,69 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
         ),
       ),
       bottomSheet: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.zero,
-        ),
         height: MediaQuery.of(context).size.height / 10,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        decoration: BoxDecoration(
+          color: Color(0xFF313131),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            InkWell(
+              onTap: () {},
+              child: Container(
+                alignment: Alignment.center,
+                height: 40,
+                width: 85.5,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Color(0xFFFFFFFF),
+                      width: 1,
+                    )),
+                child: Text(
+                  'Back',
+                  style: TextStyle(
+                    color: Color(0xFFFCFCFC),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'poppins',
+                  ),
+                ),
+              ),
+            ),
+            Text(
+              '3 steps to submit',
+              style: TextStyle(
+                color: Color(0xFFFCFCFC),
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Poppins',
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Container(
+                alignment: Alignment.center,
+                height: 40,
+                width: 85.5,
+                decoration: BoxDecoration(
+                  color: Color(0xFFFFDD99),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  'Next',
+                  style: TextStyle(
+                    color: Color(0xFF616973),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'poppins',
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
