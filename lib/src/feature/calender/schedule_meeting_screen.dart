@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:virtual_meeting/src/constants/strings.dart';
 import 'package:virtual_meeting/src/feature/calender/widget/calender_widget.dart';
-import 'package:virtual_meeting/src/feature/calender/widget/custom_check_box.dart';
+import 'package:virtual_meeting/src/feature/calender/widget/custom_bottom_sheet.dart';
+import 'package:virtual_meeting/src/feature/calender/widget/custom_radio_box.dart';
 import 'package:virtual_meeting/src/feature/calender/widget/custom_text_field.dart';
 
 class ScheduleMeetingScreen extends StatefulWidget {
@@ -16,12 +17,7 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
   DateTime? _selectedDay;
   DateTime _focuseDay = DateTime.now();
   TextEditingController controller = TextEditingController();
-  @override
-  void initState() {
-    super.initState();
-    _selectedDay = _focuseDay;
-  }
-
+  int _value = 1;
   void _onDaySelected(DateTime selectDay, DateTime focusedDay) {
     if (!isSameDay(_selectedDay, selectDay)) {
       setState(() {
@@ -29,6 +25,12 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
         _focuseDay = focusedDay;
       });
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedDay = _focuseDay;
   }
 
   @override
@@ -168,6 +170,7 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
                       width: 180,
                       color: Color(0xFF313131),
                       child: CupertinoTimePickerButton(
+                        use24hFormat: false,
                         initialTime: const TimeOfDay(hour: 9, minute: 41),
                         onTimeChanged: (time) {},
                         buttonDecoration: PickerButtonDecoration(
@@ -187,7 +190,38 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
             ),
             const SizedBox(height: 12),
             // custom check box goes here
-            CustomCheckBox(),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              decoration: BoxDecoration(
+                color: Color(0xFF313131),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: [
+                  CustomRadioBox(
+                    name: 'One time',
+                    value: 1,
+                    groupValue: _value,
+                    onChange: (int? value) {
+                      setState(() {
+                        _value = value!;
+                      });
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  CustomRadioBox(
+                    name: 'Recurring',
+                    value: 2,
+                    groupValue: _value,
+                    onChange: (int? value) {
+                      setState(() {
+                        _value = value!;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(height: 28),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
@@ -226,71 +260,7 @@ class _ScheduleMeetingScreenState extends State<ScheduleMeetingScreen> {
           ],
         ),
       ),
-      bottomSheet: Container(
-        height: MediaQuery.of(context).size.height / 10,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        decoration: BoxDecoration(
-          color: Color(0xFF313131),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              onTap: () {},
-              child: Container(
-                alignment: Alignment.center,
-                height: 40,
-                width: 85.5,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: Color(0xFFFFFFFF),
-                      width: 1,
-                    )),
-                child: Text(
-                  'Back',
-                  style: TextStyle(
-                    color: Color(0xFFFCFCFC),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'poppins',
-                  ),
-                ),
-              ),
-            ),
-            Text(
-              '3 steps to submit',
-              style: TextStyle(
-                color: Color(0xFFFCFCFC),
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                fontFamily: 'Poppins',
-              ),
-            ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                alignment: Alignment.center,
-                height: 40,
-                width: 85.5,
-                decoration: BoxDecoration(
-                  color: Color(0xFFFFDD99),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  'Next',
-                  style: TextStyle(
-                    color: Color(0xFF616973),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'poppins',
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      bottomSheet: CustomBottomSheet(),
     );
   }
 }
