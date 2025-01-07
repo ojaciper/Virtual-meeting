@@ -27,39 +27,3 @@ class MyApp extends StatelessWidget {
         home: const ScheduleMeetingScreen());
   }
 }
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Center(
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text("Testing out time"),
-            Container(
-              width: 100,
-              child: CupertinoTimePickerButton(
-                initialTime: const TimeOfDay(hour: 9, minute: 41),
-                offset: Offset(-size.width / 5, -size.height / 3.7),
-                onTimeChanged: (time) {},
-              ),
-            ),
-            Container(
-              child: CupertinoTimePickerButton(
-                offset: Offset(10, -size.height / 3.7),
-                initialTime: const TimeOfDay(hour: 9, minute: 41),
-                onTimeChanged: (time) {},
-              ),
-            )
-          ],
-        )),
-      ),
-    );
-  }
-}
