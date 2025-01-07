@@ -27,6 +27,7 @@ class CustomTextfield extends StatelessWidget {
           ),
         ),
       ),
+      cursorColor: Color(0xFFFBBA40),
       style: TextStyle(
         color: Color(0xFFFCFCFC),
       ),

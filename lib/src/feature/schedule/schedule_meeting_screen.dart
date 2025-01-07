@@ -2,10 +2,10 @@ import 'package:cupertino_calendar_picker/cupertino_calendar_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:virtual_meeting/src/constants/strings.dart';
-import 'package:virtual_meeting/src/feature/calender/widget/calender_widget.dart';
-import 'package:virtual_meeting/src/feature/calender/widget/custom_bottom_sheet.dart';
-import 'package:virtual_meeting/src/feature/calender/widget/custom_radio_box.dart';
-import 'package:virtual_meeting/src/feature/calender/widget/custom_text_field.dart';
+import 'package:virtual_meeting/src/feature/schedule/widget/calender_widget.dart';
+import 'package:virtual_meeting/src/feature/schedule/widget/custom_bottom_sheet.dart';
+import 'package:virtual_meeting/src/feature/schedule/widget/custom_radio_box.dart';
+import 'package:virtual_meeting/src/feature/schedule/widget/custom_text_field.dart';
 
 class ScheduleMeetingScreen extends StatefulWidget {
   const ScheduleMeetingScreen({super.key});

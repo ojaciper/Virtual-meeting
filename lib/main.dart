@@ -1,10 +1,6 @@
 import 'package:cupertino_calendar_picker/cupertino_calendar_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
-import 'package:virtual_meeting/src/constants/colors.dart';
-import 'package:virtual_meeting/src/feature/calender/schedule_meeting_screen.dart';
+import 'package:virtual_meeting/src/feature/schedule/schedule_meeting_screen.dart';
 
 void main() {
   runApp(const MyApp());
